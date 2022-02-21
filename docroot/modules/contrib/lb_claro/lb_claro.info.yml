@@ -1,0 +1,12 @@
+name: Layout Builder Claro
+type: module
+description: Attemps to match Layout Builder styles with Claro admin theme.
+package: Other
+core: 8.x
+core_version_requirement: ^8 || ^9
+php: 7.3
+
+# Information added by Drupal.org packaging script on 2022-01-26
+version: '8.x-1.0-beta4'
+project: 'lb_claro'
+datestamp: 1643168094
