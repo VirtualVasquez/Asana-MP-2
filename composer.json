@@ -108,7 +108,7 @@
     "drupal/views_bulk_edit": "^2.0",
     "drupal/views_bulk_operations": "^3.8",
     "drupal/webform": "^6.1",
-    "drush/drush": "~10.0",
+    "drush/drush": "^11.0",
     "npm-asset/jquery-ui-touch-punch": "dev-master",
     "oomphinc/composer-installers-extender": "^2.0",
     "symfony/css-selector": "~3.3",
