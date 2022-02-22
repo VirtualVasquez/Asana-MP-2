@@ -107,6 +107,7 @@
     "drupal/username_enumeration_prevention": "^1.1",
     "drupal/views_bulk_edit": "^2.0",
     "drupal/views_bulk_operations": "^3.8",
+    "drupal/webform": "^6.1",
     "drush/drush": "~10.0",
     "npm-asset/jquery-ui-touch-punch": "dev-master",
     "oomphinc/composer-installers-extender": "^2.0",

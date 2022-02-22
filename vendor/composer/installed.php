@@ -1,11 +1,11 @@
 <?php return array(
     'root' => array(
-        'pretty_version' => '2.0.0',
-        'version' => '2.0.0.0',
+        'pretty_version' => 'dev-main',
+        'version' => 'dev-main',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => NULL,
+        'reference' => '87a00cd60225558d8b35e55c6a174596ab8fbdde',
         'name' => 'elevatedthird/paragon-base',
         'dev' => true,
     ),
@@ -1855,6 +1855,15 @@
                 0 => '9.1.10',
             ),
         ),
+        'drupal/webform' => array(
+            'pretty_version' => '6.1.3',
+            'version' => '6.1.3.0',
+            'type' => 'drupal-module',
+            'install_path' => __DIR__ . '/../../docroot/modules/contrib/webform',
+            'aliases' => array(),
+            'reference' => '6.1.3',
+            'dev_requirement' => false,
+        ),
         'drupal/workflows' => array(
             'dev_requirement' => false,
             'replaced' => array(
@@ -1886,12 +1895,12 @@
             'dev_requirement' => false,
         ),
         'elevatedthird/paragon-base' => array(
-            'pretty_version' => '2.0.0',
-            'version' => '2.0.0.0',
+            'pretty_version' => 'dev-main',
+            'version' => 'dev-main',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => NULL,
+            'reference' => '87a00cd60225558d8b35e55c6a174596ab8fbdde',
             'dev_requirement' => false,
         ),
         'enlightn/security-checker' => array(
@@ -2155,8 +2164,8 @@
         'psr/container-implementation' => array(
             'dev_requirement' => false,
             'provided' => array(
-                0 => '1.0',
-                1 => '^1.0',
+                0 => '^1.0',
+                1 => '1.0',
             ),
         ),
         'psr/event-dispatcher' => array(
