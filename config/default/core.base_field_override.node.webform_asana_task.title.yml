@@ -1,0 +1,18 @@
+uuid: 5eb93026-6e70-4bd3-aca2-40e0dfb459e0
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.webform_asana_task
+id: node.webform_asana_task.title
+field_name: title
+entity_type: node
+bundle: webform_asana_task
+label: 'Webform Title'
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

@@ -1,0 +1,11 @@
+uuid: a9bc4c1d-09a5-48d9-8da4-4532eddda198
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.webform_asana_task
+id: node.webform_asana_task
+target_entity_type_id: node
+target_bundle: webform_asana_task
+default_langcode: site_default
+language_alterable: false

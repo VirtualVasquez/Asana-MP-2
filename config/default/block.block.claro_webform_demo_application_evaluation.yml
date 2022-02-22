@@ -1,0 +1,37 @@
+uuid: ee4a0a9f-0492-4388-b472-15f7f0df1439
+langcode: en
+status: true
+dependencies:
+  config:
+    - webform.webform.demo_application_evaluation
+  enforced:
+    module:
+      - webform_demo_application_evaluation
+  module:
+    - webform
+  theme:
+    - claro
+_core:
+  default_config_hash: 5Z8e2uAH07FKsxDJspymjIzK3DoZqmILpLP3PjpPjws
+id: claro_webform_demo_application_evaluation
+theme: claro
+region: content
+weight: 5
+provider: null
+plugin: webform_block
+settings:
+  id: webform_block
+  label: 'Demo: Application Evaluation'
+  provider: webform
+  label_display: '0'
+  webform_id: demo_application_evaluation
+  default_data: ''
+  redirect: false
+visibility:
+  webform:
+    id: webform
+    webforms:
+      demo_application: demo_application
+    negate: false
+    context_mapping:
+      webform_submission: '@webform.webform_submission_route_context:webform_submission'
