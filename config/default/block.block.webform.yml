@@ -1,0 +1,33 @@
+uuid: 17012e4b-c65e-44f5-8161-bc5c3b79e2d4
+langcode: en
+status: true
+dependencies:
+  config:
+    - webform.webform.run_the_numbers
+  module:
+    - ctools
+    - webform
+  theme:
+    - themekit
+id: webform
+theme: themekit
+region: content
+weight: 0
+provider: null
+plugin: webform_block
+settings:
+  id: webform_block
+  label: 'Run The Numbers'
+  provider: webform
+  label_display: visible
+  webform_id: run_the_numbers
+  default_data: ''
+  redirect: false
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    bundles:
+      page: page
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
