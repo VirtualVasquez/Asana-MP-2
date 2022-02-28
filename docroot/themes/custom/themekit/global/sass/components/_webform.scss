@@ -1,0 +1,33 @@
+#block-webform > div > h2 {
+  font-size: 1.2em;
+}
+
+#block-webform{
+  width: 60%;
+  margin-left: 10%;
+}
+
+#edit-instructions{
+  width: 65%;
+}
+input[required]{
+  width: 40%;
+}
+
+.js-form-required{
+  display: none;
+}
+
+#edit-tos{
+  width: 90%;
+}
+
+[data-drupal-selector]:focus{
+  border: solid 2px rgb(0, 103, 179);
+}
+
+.webform-button--submit{
+  color: rgb(255, 255, 255);
+  background-color: rgb(102, 102, 102);
+  padding: 0.5em;
+}

@@ -1,4 +1,5 @@
 <?php
+
 namespace Drush\Commands;
 
 use Consolidation\AnnotatedCommand\AnnotationData;
@@ -12,14 +13,13 @@ use Symfony\Component\Console\Input\Input;
  */
 class ValidatorsCommands
 {
-
     /**
      * Validate that passed entity names are valid.
      * @see \Drush\Commands\core\ViewsCommands::execute for an example.
      *
      * @hook validate @validate-entity-load
-     * @param \Consolidation\AnnotatedCommand\CommandData $commandData
-     * @return \Consolidation\AnnotatedCommand\CommandError|null
+     * @param CommandData $commandData
+     * @return CommandError|null
      */
     public function validateEntityLoad(CommandData $commandData)
     {
@@ -33,16 +33,15 @@ class ValidatorsCommands
     }
 
     /**
-     * Validate that passed module names are enabled. We use pre-init phase because interact() methods run early and they
+     * Validate that passed module names are enabled. We use post-init phase because interact() methods run early and they
      * need to know that their module is enabled (e.g. image-flush).
      *
      * @see \Drush\Commands\core\WatchdogCommands::show for an example.
      *
-     * @hook pre-init @validate-module-enabled
-     * @param \Consolidation\AnnotatedCommand\CommandData $commandData
-     * @return \Consolidation\AnnotatedCommand\CommandError|null
+     * @hook post-init @validate-module-enabled
+     * @return CommandError|null
      */
-    public function validateModuleEnabled(Input $input, AnnotationData $annotationData)
+    public function validateModuleEnabled(Input $input, AnnotationData $annotationData): void
     {
         $names = StringUtils::csvToArray($annotationData->get('validate-module-enabled'));
         $loaded = \Drupal::moduleHandler()->getModuleList();
@@ -58,13 +57,13 @@ class ValidatorsCommands
      * Annotation value should be the name of the argument containing the path.
      *
      * @hook validate @validate-file-exists
-     * @param \Consolidation\AnnotatedCommand\CommandData $commandData
-     * @return \Consolidation\AnnotatedCommand\CommandError|null
+     * @param CommandData $commandData
+     * @return CommandError|null
      */
     public function validateFileExists(CommandData $commandData)
     {
         $missing = [];
-        $arg_names = _convert_csv_to_array($commandData->annotationData()->get('validate-file-exists', null));
+        $arg_names =  StringUtils::csvToArray($commandData->annotationData()->get('validate-file-exists', null));
         foreach ($arg_names as $arg_name) {
             if ($commandData->input()->hasArgument($arg_name)) {
                 $path = $commandData->input()->getArgument($arg_name);
@@ -89,13 +88,13 @@ class ValidatorsCommands
      * Annotation value should be extension name. If multiple, delimit by a comma.
      *
      * @hook validate @validate-php-extension
-     * @param \Consolidation\AnnotatedCommand\CommandData $commandData
-     * @return \Consolidation\AnnotatedCommand\CommandError|null
+     * @param CommandData $commandData
+     * @return CommandError|null
      */
     public function validatePHPExtension(CommandData $commandData)
     {
         $missing = [];
-        $arg_names = _convert_csv_to_array($commandData->annotationData()->get('validate-php-extension', null));
+        $arg_names =  StringUtils::csvToArray($commandData->annotationData()->get('validate-php-extension', null));
         foreach ($arg_names as $arg_name) {
             if (!extension_loaded($arg_name)) {
                 $missing[] = $arg_name;
@@ -114,8 +113,8 @@ class ValidatorsCommands
      * Annotation value should be the name of the argument/option containing the permission(s).
      *
      * @hook validate @validate-permissions
-     * @param \Consolidation\AnnotatedCommand\CommandData $commandData
-     * @return \Consolidation\AnnotatedCommand\CommandError|null
+     * @param CommandData $commandData
+     * @return CommandError|null
      */
     public function validatePermissions(CommandData $commandData)
     {
