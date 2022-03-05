@@ -1,0 +1,8 @@
+uuid: e02db11b-66fc-4935-b22c-9c783f94d14c
+langcode: en
+status: true
+dependencies: {  }
+id: accordion
+label: Accordion
+revision: 0
+description: 'Asana Accordion'

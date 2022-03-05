@@ -1,0 +1,30 @@
+uuid: 89905c34-4fcc-451b-b3c9-4e2d4cb9529e
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:accordion:d7c8d35f-29e2-4753-81a2-ce63228d314d'
+  module:
+    - block_content
+    - system
+  theme:
+    - themekit
+id: summits
+theme: themekit
+region: content
+weight: 0
+provider: null
+plugin: 'block_content:d7c8d35f-29e2-4753-81a2-ce63228d314d'
+settings:
+  id: 'block_content:d7c8d35f-29e2-4753-81a2-ce63228d314d'
+  label: Summits
+  provider: block_content
+  label_display: visible
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    pages: /demo-page-accordion
+    negate: false

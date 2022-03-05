@@ -1,0 +1,25 @@
+uuid: 62a8d6a0-5619-4f91-86f2-6c207361c91f
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.accordion
+    - field.storage.block_content.field_accordion_header
+  module:
+    - allowed_formats
+    - text
+third_party_settings:
+  allowed_formats:
+    allowed_formats: {  }
+id: block_content.accordion.field_accordion_header
+field_name: field_accordion_header
+entity_type: block_content
+bundle: accordion
+label: 'Accordion Header'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text
