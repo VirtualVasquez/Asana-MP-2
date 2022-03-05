@@ -8,8 +8,15 @@ dependencies:
     - field.field.paragraph.header_banner_basic.field_p_link
     - paragraphs.paragraphs_type.header_banner_basic
   module:
+    - field_layout
+    - layout_discovery
     - paragraphs
     - text
+third_party_settings:
+  field_layout:
+    id: layout_onecol
+    settings:
+      label: ''
 _core:
   default_config_hash: 2IHBx5yuK7zj9Skx7192-6qTdS5ioye-py7UcrmU8Y0
 id: paragraph.header_banner_basic.default

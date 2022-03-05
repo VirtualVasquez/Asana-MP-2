@@ -6,7 +6,14 @@ dependencies:
     - field.field.paragraph.link_default.field_link
     - paragraphs.paragraphs_type.link_default
   module:
+    - field_layout
+    - layout_discovery
     - link
+third_party_settings:
+  field_layout:
+    id: layout_onecol
+    settings:
+      label: ''
 _core:
   default_config_hash: VgQVDjyypV1z-Rh9jbhgQE5A43UKkEBVlOXIfIolr3w
 id: paragraph.link_default.default

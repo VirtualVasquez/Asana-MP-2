@@ -9,8 +9,15 @@ dependencies:
     - field.field.media.remote_video.field_video_type
     - media.type.remote_video
   module:
+    - field_layout
+    - layout_discovery
     - media
     - path
+third_party_settings:
+  field_layout:
+    id: layout_onecol
+    settings:
+      label: ''
 _core:
   default_config_hash: mBhwQ8hy3KIloyoaV_AEg3TUk7yn6rFyZhx3VKo7iNU
 id: media.remote_video.default

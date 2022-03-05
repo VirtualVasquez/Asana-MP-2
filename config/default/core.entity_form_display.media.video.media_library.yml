@@ -9,6 +9,14 @@ dependencies:
     - field.field.media.video.field_tags
     - field.field.media.video.field_video_type
     - media.type.video
+  module:
+    - field_layout
+    - layout_discovery
+third_party_settings:
+  field_layout:
+    id: layout_onecol
+    settings:
+      label: ''
 _core:
   default_config_hash: 4FQ6k3FAhlXu8jC8kKoBNQhpDcOhSCFXy1Vevhz6qmg
 id: media.video.media_library

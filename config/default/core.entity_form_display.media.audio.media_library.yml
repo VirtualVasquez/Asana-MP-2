@@ -9,6 +9,14 @@ dependencies:
     - field.field.media.audio.field_media_audio_file
     - field.field.media.audio.field_tags
     - media.type.audio
+  module:
+    - field_layout
+    - layout_discovery
+third_party_settings:
+  field_layout:
+    id: layout_onecol
+    settings:
+      label: ''
 _core:
   default_config_hash: kn5aqnjJ_nAfC8U2KkcK_e16kev1-ojACoa5VL6WoTU
 id: media.audio.media_library

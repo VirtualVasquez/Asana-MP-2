@@ -11,7 +11,14 @@ dependencies:
     - field.field.media.file.field_tags
     - media.type.file
   module:
+    - field_layout
     - file
+    - layout_discovery
+third_party_settings:
+  field_layout:
+    id: layout_onecol
+    settings:
+      label: ''
 _core:
   default_config_hash: ps24WHRZfqgDPRFgMOQLisqDyHLrAPnRXuqdICl4WN4
 id: media.file.media_browser

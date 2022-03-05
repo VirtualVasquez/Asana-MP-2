@@ -10,6 +10,14 @@ dependencies:
     - field.field.media.svg.field_svg_type
     - field.field.media.svg.field_tags
     - media.type.svg
+  module:
+    - field_layout
+    - layout_discovery
+third_party_settings:
+  field_layout:
+    id: layout_onecol
+    settings:
+      label: ''
 _core:
   default_config_hash: pjNzVIhKX0eTgNb3jBFGMtzGBiCDEuykq9_w8YIrQPA
 id: media.svg.media_library

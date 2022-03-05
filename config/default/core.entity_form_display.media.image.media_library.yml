@@ -10,7 +10,14 @@ dependencies:
     - image.style.thumbnail
     - media.type.image
   module:
+    - field_layout
     - image
+    - layout_discovery
+third_party_settings:
+  field_layout:
+    id: layout_onecol
+    settings:
+      label: ''
 _core:
   default_config_hash: qVwircclUBX1rtcdrxBsWmvqmqP4gmBlZ1feGxc-R4I
 id: media.image.media_library

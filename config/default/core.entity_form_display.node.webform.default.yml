@@ -8,11 +8,18 @@ dependencies:
     - node.type.webform
   module:
     - content_moderation
+    - field_layout
+    - layout_discovery
     - path
     - scheduler
     - scheduler_content_moderation_integration
     - text
     - webform
+third_party_settings:
+  field_layout:
+    id: layout_onecol
+    settings:
+      label: ''
 _core:
   default_config_hash: A3evv2pt6d-bKCPcgjXA5VGTemXWOxG3lSXvWiRWcck
 id: node.webform.default

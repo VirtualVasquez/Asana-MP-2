@@ -3,8 +3,15 @@ langcode: en
 status: true
 dependencies:
   module:
+    - field_layout
+    - layout_discovery
     - path
     - user
+third_party_settings:
+  field_layout:
+    id: layout_onecol
+    settings:
+      label: ''
 _core:
   default_config_hash: 93eOqh4GBh04l-eIT-tGzIjzob2I0ff7rOJLSYHpm2Y
 id: user.user.default

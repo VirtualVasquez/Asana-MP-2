@@ -10,7 +10,14 @@ dependencies:
     - image.style.x_small_square_1_1
     - media.type.image
   module:
+    - field_layout
     - image
+    - layout_discovery
+third_party_settings:
+  field_layout:
+    id: layout_onecol
+    settings:
+      label: ''
 _core:
   default_config_hash: aSaW-XQO9KVQ2yAbY1gOsFdzqbPA-bjQx6JqD8qkp6U
 id: media.image.media_browser

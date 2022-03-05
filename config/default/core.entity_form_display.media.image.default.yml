@@ -9,8 +9,15 @@ dependencies:
     - image.style.x_small_square_1_1
     - media.type.image
   module:
+    - field_layout
     - image
+    - layout_discovery
     - path
+third_party_settings:
+  field_layout:
+    id: layout_onecol
+    settings:
+      label: ''
 _core:
   default_config_hash: jOB_kd8FrVX1s5tSfts3m4DwGWZLwhaERT3MLfBRM4c
 id: media.image.default

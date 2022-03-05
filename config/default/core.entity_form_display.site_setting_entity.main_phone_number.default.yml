@@ -6,7 +6,14 @@ dependencies:
     - field.field.site_setting_entity.main_phone_number.field_phone_number
     - site_settings.site_setting_entity_type.main_phone_number
   module:
+    - field_layout
+    - layout_discovery
     - telephone
+third_party_settings:
+  field_layout:
+    id: layout_onecol
+    settings:
+      label: ''
 _core:
   default_config_hash: laHQCqXQYczejn1cUi3Gch_tyCoY6Kfek4QFkMOR67g
 id: site_setting_entity.main_phone_number.default

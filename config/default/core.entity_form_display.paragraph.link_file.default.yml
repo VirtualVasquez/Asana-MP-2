@@ -9,6 +9,13 @@ dependencies:
     - paragraphs.paragraphs_type.link_file
   module:
     - entity_browser
+    - field_layout
+    - layout_discovery
+third_party_settings:
+  field_layout:
+    id: layout_onecol
+    settings:
+      label: ''
 _core:
   default_config_hash: WJwV9b-SarDVYdiYlkrQKvsHcSFcQ0aV6Eg4HxKEmmg
 id: paragraph.link_file.default

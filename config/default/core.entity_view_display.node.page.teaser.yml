@@ -6,6 +6,7 @@ dependencies:
     - core.entity_view_mode.node.teaser
     - field.field.node.page.body
     - field.field.node.page.field_metatags
+    - field.field.node.page.layout_builder__layout
     - node.type.page
   module:
     - text
@@ -25,6 +26,11 @@ content:
       trim_length: 600
     third_party_settings: {  }
     region: content
+  content_moderation_control:
+    weight: -20
+    settings: {  }
+    third_party_settings: {  }
+    region: content
   links:
     weight: 101
     region: content
@@ -33,3 +39,4 @@ content:
 hidden:
   field_metatags: true
   langcode: true
+  layout_builder__layout: true

@@ -6,14 +6,20 @@ dependencies:
     - field.field.node.article.body
     - field.field.node.article.field_tags
     - node.type.article
-    - workflows.workflow.editorial
   module:
     - allowed_formats
     - content_moderation
+    - field_layout
+    - layout_discovery
     - path
     - scheduler
     - scheduler_content_moderation_integration
     - text
+third_party_settings:
+  field_layout:
+    id: layout_onecol
+    settings:
+      label: ''
 _core:
   default_config_hash: DbOzhm7lodmALRYYxN_NtVaMuf-Obkg8nxZUvoyVJ54
 id: node.article.default

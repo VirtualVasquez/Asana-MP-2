@@ -7,6 +7,13 @@ dependencies:
     - site_settings.site_setting_entity_type.main_address
   module:
     - address
+    - field_layout
+    - layout_discovery
+third_party_settings:
+  field_layout:
+    id: layout_onecol
+    settings:
+      label: ''
 _core:
   default_config_hash: o3ii7PMmwcYdcY_ZyZWDhKG1HXfcYSkad9R2XAETMpA
 id: site_setting_entity.main_address.default

@@ -11,11 +11,18 @@ dependencies:
   module:
     - content_moderation
     - datetime
+    - field_layout
+    - layout_discovery
     - path
     - scheduler
     - scheduler_content_moderation_integration
     - text
     - webform
+third_party_settings:
+  field_layout:
+    id: layout_onecol
+    settings:
+      label: ''
 _core:
   default_config_hash: wu26NgnES_kskukOYve_1miB3TI9GhlRpHK_fDZzv_c
 id: node.webform_demo_event.default

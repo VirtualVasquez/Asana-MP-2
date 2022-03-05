@@ -9,8 +9,15 @@ dependencies:
     - field.field.media.video.field_video_type
     - media.type.video
   module:
+    - field_layout
     - file
+    - layout_discovery
     - path
+third_party_settings:
+  field_layout:
+    id: layout_onecol
+    settings:
+      label: ''
 _core:
   default_config_hash: SvtQSnU421T7pcvbS4_momE3Mhn78TatjauHmtLOnuc
 id: media.video.default

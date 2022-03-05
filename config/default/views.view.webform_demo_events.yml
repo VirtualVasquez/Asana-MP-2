@@ -6,6 +6,7 @@ dependencies:
     - node.type.webform_demo_event
     - system.menu.main
   module:
+    - datetime
     - node
     - user
 _core:
@@ -195,6 +196,7 @@ display:
         weight: 10
         context: '0'
         menu_name: main
+        enabled: false
     cache_metadata:
       max-age: -1
       contexts:
