@@ -4,11 +4,19 @@
  */
 require('./skip-link');
 
-const accordItems = document.querySelectorAll('.field--name-field-accordion-item>.field__item');
+const accordItems = document.querySelectorAll('.field--name-field-item-header');
 for (i = 0; i < accordItems.length; i += 1) {
   const btn = document.createElement('button');
   btn.innerHTML = '+';
   accordItems[i].prepend(btn);
+  btn.addEventListener('click', () => {
+    btn.parentElement.parentElement.parentElement.classList.toggle('active');
+    if (btn.innerHTML === '+') {
+      btn.innerHTML = '-';
+    } else {
+      btn.innerHTML = '+';
+    }
+  });
 }
 
 const linkItems = document.querySelectorAll('.field__item>a');

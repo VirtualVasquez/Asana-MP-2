@@ -99,12 +99,25 @@
  */
 __webpack_require__(/*! ./skip-link */ "./global/js/src/skip-link.js");
 
-var accordItems = document.querySelectorAll('.field--name-field-accordion-item>.field__item');
+var accordItems = document.querySelectorAll('.field--name-field-item-header');
 
-for (i = 0; i < accordItems.length; i += 1) {
+var _loop = function _loop() {
   var btn = document.createElement('button');
   btn.innerHTML = '+';
   accordItems[i].prepend(btn);
+  btn.addEventListener('click', function () {
+    btn.parentElement.parentElement.parentElement.classList.toggle('active');
+
+    if (btn.innerHTML === '+') {
+      btn.innerHTML = '-';
+    } else {
+      btn.innerHTML = '+';
+    }
+  });
+};
+
+for (i = 0; i < accordItems.length; i += 1) {
+  _loop();
 }
 
 var linkItems = document.querySelectorAll('.field__item>a');

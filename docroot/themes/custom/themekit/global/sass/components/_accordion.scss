@@ -11,30 +11,54 @@
     font-size: 1.2em;
   }
 
-  button, .paragraph--type--accordion-item{
+  button, .field--name-field-item-header > .field__item{
     display: inline-block;
-    vertical-align: top;
   }
 
   button{
-    margin-top: -6px;
     color: #FFB648;
     margin-right: 0.5em;
   }
 
-  .field--name-field-item-contents{
-    margin: 1em 0 1em 0;
-    display:flex;
-  }
-
   .field--name-field-accordion-item > .field__item{
     margin: 1em 0 0 0;
+    > a{
+      font-weight: bold;
+      color: #FFB648;
+      > span:first-of-type{
+        text-decoration: underline;
+      }
+    }
   }
+
   .field__item > a{
     font-weight: bold;
     color: #FFB648;
+    > span:first-of-type{
+      text-decoration: underline;
+    }
   }
-  .field__item > a > span:first-of-type{
-    text-decoration: underline;
+
+
+  div.field__item > div.paragraph--type--accordion-item  > {
+    div.field--name-field-item-contents, div.field--name-field-link {
+      display:none;
+    }
   }
+
+  div.field__item.active > div.paragraph--type--accordion-item > {
+    .field--name-field-item-header > .field__item{
+      margin-left: 0.4em;
+    }
+    div.field--name-field-item-contents, div.field--name-field-link {
+      display:flex;
+      margin: 0 0 0 3em;
+    }
+    div.field--name-field-item-contents{
+      margin: 1em 0 1em 3em;
+    }
+  }
+
+
+
 }
