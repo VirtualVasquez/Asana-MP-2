@@ -1,0 +1,40 @@
+.block--accordion{
+  background-color: #212121;
+  color: white;
+  h2, button {
+    font-size: 2em;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  .field--name-field-item-header{
+    font-weight: bold;
+    font-size: 1.2em;
+  }
+
+  button, .paragraph--type--accordion-item{
+    display: inline-block;
+    vertical-align: top;
+  }
+
+  button{
+    margin-top: -6px;
+    color: #FFB648;
+    margin-right: 0.5em;
+  }
+
+  .field--name-field-item-contents{
+    margin: 1em 0 1em 0;
+    display:flex;
+  }
+
+  .field--name-field-accordion-item > .field__item{
+    margin: 1em 0 0 0;
+  }
+  .field__item > a{
+    font-weight: bold;
+    color: #FFB648;
+  }
+  .field__item > a > span:first-of-type{
+    text-decoration: underline;
+  }
+}

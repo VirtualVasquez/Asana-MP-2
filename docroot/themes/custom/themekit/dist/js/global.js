@@ -99,6 +99,27 @@
  */
 __webpack_require__(/*! ./skip-link */ "./global/js/src/skip-link.js");
 
+var accordItems = document.querySelectorAll('.field--name-field-accordion-item>.field__item');
+
+for (i = 0; i < accordItems.length; i += 1) {
+  var btn = document.createElement('button');
+  btn.innerHTML = '+';
+  accordItems[i].prepend(btn);
+}
+
+var linkItems = document.querySelectorAll('.field__item>a');
+
+for (i = 0; i < accordItems.length; i += 1) {
+  var text = linkItems[i].textContent;
+  linkItems[i].innerHTML = '';
+  var spn1 = document.createElement('span');
+  spn1.innerHTML = text;
+  var spn2 = document.createElement('span');
+  spn2.innerHTML = '&nbsp >';
+  linkItems[i].append(spn1);
+  linkItems[i].append(spn2);
+}
+
 /***/ }),
 
 /***/ "./global/js/src/skip-link.js":

@@ -1096,6 +1096,34 @@ div[data-drupal-messages] .messages:before, div[data-drupal-messages] .messages.
   line-height: 1;
   font-smoothing: antialiased; }
 
+.block--accordion {
+  background-color: #212121;
+  color: white; }
+  .block--accordion h2, .block--accordion button {
+    font-size: 2em;
+    font-weight: bold;
+    text-transform: uppercase; }
+  .block--accordion .field--name-field-item-header {
+    font-weight: bold;
+    font-size: 1.2em; }
+  .block--accordion button, .block--accordion .paragraph--type--accordion-item {
+    display: inline-block;
+    vertical-align: top; }
+  .block--accordion button {
+    margin-top: -6px;
+    color: #FFB648;
+    margin-right: 0.5em; }
+  .block--accordion .field--name-field-item-contents {
+    margin: 1em 0 1em 0;
+    display: flex; }
+  .block--accordion .field--name-field-accordion-item > .field__item {
+    margin: 1em 0 0 0; }
+  .block--accordion .field__item > a {
+    font-weight: bold;
+    color: #FFB648; }
+  .block--accordion .field__item > a > span:first-of-type {
+    text-decoration: underline; }
+
 @-webkit-keyframes rotate {
   0% {
     -webkit-transform: rotate(0deg);

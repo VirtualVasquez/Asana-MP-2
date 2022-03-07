@@ -5,10 +5,12 @@ dependencies:
   config:
     - field.field.paragraph.accordion_item.field_item_contents
     - field.field.paragraph.accordion_item.field_item_header
+    - field.field.paragraph.accordion_item.field_link
     - paragraphs.paragraphs_type.accordion_item
   module:
     - field_layout
     - layout_discovery
+    - link
     - text
 third_party_settings:
   field_layout:
@@ -35,6 +37,14 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: text_textfield
+    region: content
+  field_link:
+    weight: 2
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+    type: link_default
     region: content
 hidden:
   created: true

@@ -5,8 +5,10 @@ dependencies:
   config:
     - field.field.paragraph.accordion_item.field_item_contents
     - field.field.paragraph.accordion_item.field_item_header
+    - field.field.paragraph.accordion_item.field_link
     - paragraphs.paragraphs_type.accordion_item
   module:
+    - link
     - text
 id: paragraph.accordion_item.default
 targetEntityType: paragraph
@@ -26,5 +28,17 @@ content:
     settings: {  }
     third_party_settings: {  }
     type: text_default
+    region: content
+  field_link:
+    weight: 2
+    label: visually_hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    type: link
     region: content
 hidden: {  }

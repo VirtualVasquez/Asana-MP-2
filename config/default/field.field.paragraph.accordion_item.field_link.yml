@@ -1,0 +1,23 @@
+uuid: bfd9073a-86b4-4861-94c3-4fe54811046a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_link
+    - paragraphs.paragraphs_type.accordion_item
+  module:
+    - link
+id: paragraph.accordion_item.field_link
+field_name: field_link
+entity_type: paragraph
+bundle: accordion_item
+label: Link
+description: 'Link for accordion item'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 17
+  title: 1
+field_type: link
