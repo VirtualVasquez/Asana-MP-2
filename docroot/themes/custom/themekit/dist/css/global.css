@@ -15,6 +15,9 @@
  * https://get.foundation
  * Licensed under MIT Open Source
  */
+html {
+  background-color: #212121; }
+
 /*------------------------------------*\
   02 - Utilities
 \*------------------------------------*/
@@ -109,6 +112,9 @@ small, .small {
  * https://get.foundation
  * Licensed under MIT Open Source
  */
+html {
+  background-color: #212121; }
+
 /*------------------------------------*\
   02 - Utilities
 \*------------------------------------*/
