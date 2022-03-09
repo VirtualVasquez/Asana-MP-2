@@ -14,8 +14,9 @@
  * https://get.foundation
  * Licensed under MIT Open Source
  */
-html {
-  background-color: #212121; }
+body {
+  background-color: #212121;
+  color: white; }
 
 /*------------------------------------*\
   02 - Utilities

@@ -1,0 +1,25 @@
+uuid: 9f638e09-a99c-406e-b50e-16af81570919
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_schedule
+    - node.type.event_page
+  module:
+    - allowed_formats
+    - text
+third_party_settings:
+  allowed_formats:
+    allowed_formats: {  }
+id: node.event_page.field_schedule
+field_name: field_schedule
+entity_type: node
+bundle: event_page
+label: 'Event Schedule'
+description: 'The Event''s Schedule throughout the day. '
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

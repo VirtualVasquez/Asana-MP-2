@@ -1,0 +1,27 @@
+uuid: e0520ed5-c04a-46c3-8284-2a5be8b5d02b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.body
+    - node.type.event_page
+  module:
+    - allowed_formats
+    - text
+third_party_settings:
+  allowed_formats:
+    allowed_formats: {  }
+id: node.event_page.body
+field_name: body
+entity_type: node
+bundle: event_page
+label: Body
+description: 'Choose to ignore this for now.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: true
+  required_summary: false
+field_type: text_with_summary

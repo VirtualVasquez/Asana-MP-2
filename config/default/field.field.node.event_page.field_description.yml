@@ -1,0 +1,27 @@
+uuid: 31706ff2-644c-41b3-893a-3a4a2bb42b42
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_description
+    - node.type.event_page
+  module:
+    - allowed_formats
+    - text
+third_party_settings:
+  allowed_formats:
+    allowed_formats: {  }
+id: node.event_page.field_description
+field_name: field_description
+entity_type: node
+bundle: event_page
+label: Description
+description: 'Description of the event.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: false
+  required_summary: false
+field_type: text_with_summary

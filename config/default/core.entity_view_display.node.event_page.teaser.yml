@@ -1,0 +1,51 @@
+uuid: 8039ecea-2f2e-4a3c-bfcc-5f8343590ac3
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.event_page.body
+    - field.field.node.event_page.field_date_time
+    - field.field.node.event_page.field_description
+    - field.field.node.event_page.field_image
+    - field.field.node.event_page.field_lightening_talks
+    - field.field.node.event_page.field_link
+    - field.field.node.event_page.field_location
+    - field.field.node.event_page.field_p_header
+    - field.field.node.event_page.field_schedule
+    - field.field.node.event_page.field_sponsor
+    - field.field.node.event_page.field_subheading
+    - node.type.event_page
+  module:
+    - text
+    - user
+id: node.event_page.teaser
+targetEntityType: node
+bundle: event_page
+mode: teaser
+content:
+  body:
+    label: hidden
+    type: text_summary_or_trimmed
+    weight: 101
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    region: content
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden:
+  field_date_time: true
+  field_description: true
+  field_image: true
+  field_lightening_talks: true
+  field_link: true
+  field_location: true
+  field_p_header: true
+  field_schedule: true
+  field_sponsor: true
+  field_subheading: true
+  langcode: true

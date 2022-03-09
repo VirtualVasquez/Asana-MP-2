@@ -15,8 +15,9 @@
  * https://get.foundation
  * Licensed under MIT Open Source
  */
-html {
-  background-color: #212121; }
+body {
+  background-color: #212121;
+  color: white; }
 
 /*------------------------------------*\
   02 - Utilities
@@ -112,8 +113,9 @@ small, .small {
  * https://get.foundation
  * Licensed under MIT Open Source
  */
-html {
-  background-color: #212121; }
+body {
+  background-color: #212121;
+  color: white; }
 
 /*------------------------------------*\
   02 - Utilities
@@ -1465,6 +1467,10 @@ ul.layout-selection {
   05 - Site Specific
   Improvements that are specific to this site
 \*------------------------------------*/
+.node--type-event-page .node__content {
+  width: 80%;
+  margin-left: 10%; }
+
 #skip-to-content {
   position: fixed;
   top: 0;
