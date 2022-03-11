@@ -11,6 +11,8 @@ ckeditor_stylesheets:
 libraries:
   - core/Drupal
   - themekit/base
+  - themekit/rubik
+  - themekit/inter
 
 components:
   namespaces:

@@ -4,6 +4,7 @@
  */
 require('./skip-link');
 
+/** used to add a '+/-' button for all accordion items sitewide.* */
 const accordItems = document.querySelectorAll('.field--name-field-item-header');
 for (i = 0; i < accordItems.length; i += 1) {
   const btn = document.createElement('button');
@@ -19,6 +20,7 @@ for (i = 0; i < accordItems.length; i += 1) {
   });
 }
 
+/** appends the '>' character to the 'Get Details' link in each accordion item.* */
 const linkItems = document.querySelectorAll('.field__item>a');
 for (i = 0; i < accordItems.length; i += 1) {
   const text = linkItems[i].textContent;
