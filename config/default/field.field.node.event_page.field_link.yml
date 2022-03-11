@@ -1,0 +1,28 @@
+uuid: ccbdf477-3252-46a2-8bab-dffe4c93de95
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_link
+    - node.type.event_page
+  module:
+    - link
+id: node.event_page.field_link
+field_name: field_link
+entity_type: node
+bundle: event_page
+label: Link
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    attributes: {  }
+    uri: 'https://youtube.com'
+    title: 'Register Now'
+    options: {  }
+default_value_callback: ''
+settings:
+  link_type: 17
+  title: 1
+field_type: link

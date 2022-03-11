@@ -15,8 +15,9 @@
  * https://get.foundation
  * Licensed under MIT Open Source
  */
-html {
-  background-color: #212121; }
+body {
+  background-color: #41493A;
+  color: white; }
 
 /*------------------------------------*\
   02 - Utilities
@@ -112,8 +113,9 @@ small, .small {
  * https://get.foundation
  * Licensed under MIT Open Source
  */
-html {
-  background-color: #212121; }
+body {
+  background-color: #41493A;
+  color: white; }
 
 /*------------------------------------*\
   02 - Utilities
@@ -1465,6 +1467,77 @@ ul.layout-selection {
   05 - Site Specific
   Improvements that are specific to this site
 \*------------------------------------*/
+.node--type-event-page .field--name-field-date-time, .node--type-event-page .block--field-blocknodeevent-pagefield-location {
+  margin-left: 10%;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 1.25em; }
+
+.node--type-event-page .field--name-field-date-time {
+  margin-top: 4em; }
+
+.node--type-event-page .block--field-blocknodeevent-pagefield-location {
+  margin-bottom: 6em; }
+
+.node--type-event-page .paragraph--type--header-banner-basic {
+  margin-left: 10%;
+  width: 60%;
+  position: absolute;
+  z-index: 20; }
+  .node--type-event-page .paragraph--type--header-banner-basic :first-child > h1 {
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 6.5em;
+    line-height: 90%;
+    margin: 0 0 0.5em 0; }
+
+.node--type-event-page .field--name-field-link > a {
+  color: #212121;
+  background-color: #FFB648;
+  padding: 0.75em;
+  font-weight: bold; }
+
+.node--type-event-page .layout--twocol-section--50-50:nth-child(2) {
+  background-color: #F4F1E6;
+  padding: 5em 0 8em 0;
+  margin-top: -5%; }
+
+.node--type-event-page .field--name-field-subheading {
+  margin-left: 20%;
+  font-size: 3em;
+  font-weight: bold;
+  text-transform: uppercase;
+  line-height: 100%;
+  width: 60%;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: end;
+  color: #7A3813; }
+
+.node--type-event-page .block--field-blocknodeevent-pagefield-description {
+  width: 37%;
+  color: #212121;
+  margin-top: 6em;
+  margin-bottom: 2em; }
+
+.node--type-event-page .layout--twocol-section--50-50:nth-child(3) {
+  padding-top: 5em;
+  width: 80%;
+  margin-left: 10%; }
+  .node--type-event-page .layout--twocol-section--50-50:nth-child(3) a {
+    color: #FFB648;
+    text-decoration: underline;
+    font-weight: bold; }
+  .node--type-event-page .layout--twocol-section--50-50:nth-child(3) .field--name-field-heading {
+    font-size: 3rem;
+    font-weight: bolder; }
+  .node--type-event-page .layout--twocol-section--50-50:nth-child(3) .field--name-field-sponsor {
+    background-color: white;
+    border-radius: 1em;
+    padding: 2em;
+    text-align: center;
+    width: 65%; }
+
 #skip-to-content {
   position: fixed;
   top: 0;

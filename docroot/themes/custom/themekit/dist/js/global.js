@@ -98,6 +98,8 @@
  * Entry point for all theme related js.
  */
 __webpack_require__(/*! ./skip-link */ "./global/js/src/skip-link.js");
+/** used to add a '+/-' button for all accordion items sitewide.* */
+
 
 var accordItems = document.querySelectorAll('.field--name-field-item-header');
 
@@ -119,6 +121,8 @@ var _loop = function _loop() {
 for (i = 0; i < accordItems.length; i += 1) {
   _loop();
 }
+/** appends the '>' character to the 'Get Details' link in each accordion item.* */
+
 
 var linkItems = document.querySelectorAll('.field__item>a');
 

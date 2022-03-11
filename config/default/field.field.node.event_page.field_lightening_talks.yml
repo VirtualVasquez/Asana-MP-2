@@ -1,0 +1,25 @@
+uuid: 40c3e25b-4547-44af-a4a1-02dbdc575b92
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_lightening_talks
+    - node.type.event_page
+  module:
+    - allowed_formats
+    - text
+third_party_settings:
+  allowed_formats:
+    allowed_formats: {  }
+id: node.event_page.field_lightening_talks
+field_name: field_lightening_talks
+entity_type: node
+bundle: event_page
+label: 'Lightening Talks'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long
