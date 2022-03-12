@@ -69,26 +69,26 @@ class EntityTranslationFormTest extends BrowserTestBase {
 
     $node = $this->drupalGetNodeByTitle($edit['title[0][value]']);
 
-    $this->assertTrue($node->language()->getId() == $form_langcode, 'Form language is the same as the entity language.');
+    $this->assertSame($form_langcode, $node->language()->getId(), 'Form language is the same as the entity language.');
 
     // Edit the node and test the form language.
     $this->drupalGet($this->langcodes[0] . '/node/' . $node->id() . '/edit');
     $form_langcode = \Drupal::state()->get('entity_test.form_langcode');
-    $this->assertTrue($node->language()->getId() == $form_langcode, 'Form language is the same as the entity language.');
+    $this->assertSame($form_langcode, $node->language()->getId(), 'Form language is the same as the entity language.');
 
     // Explicitly set form langcode.
     $langcode = $this->langcodes[0];
     $form_state_additions['langcode'] = $langcode;
     \Drupal::service('entity.form_builder')->getForm($node, 'default', $form_state_additions);
     $form_langcode = \Drupal::state()->get('entity_test.form_langcode');
-    $this->assertTrue($langcode == $form_langcode, 'Form language is the same as the language parameter.');
+    $this->assertSame($form_langcode, $langcode, 'Form language is the same as the language parameter.');
 
     // Enable language selector.
     $this->drupalGet('admin/structure/types/manage/page');
     $edit = ['language_configuration[language_alterable]' => TRUE, 'language_configuration[langcode]' => LanguageInterface::LANGCODE_NOT_SPECIFIED];
     $this->drupalGet('admin/structure/types/manage/page');
     $this->submitForm($edit, 'Save content type');
-    $this->assertRaw(t('The content type %type has been updated.', ['%type' => 'Basic page']));
+    $this->assertSession()->pageTextContains("The content type Basic page has been updated.");
 
     // Create a node with language.
     $edit = [];
@@ -123,7 +123,7 @@ class EntityTranslationFormTest extends BrowserTestBase {
     $node->save();
     $this->drupalGet($langcode2 . '/node/' . $node->id() . '/edit');
     $form_langcode = \Drupal::state()->get('entity_test.form_langcode');
-    $this->assertTrue($langcode2 == $form_langcode, "Node edit form language is $langcode2.");
+    $this->assertSame($form_langcode, $langcode2, "Node edit form language is $langcode2.");
   }
 
 }

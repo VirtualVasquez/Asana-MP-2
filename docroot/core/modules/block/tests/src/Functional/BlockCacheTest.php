@@ -75,7 +75,7 @@ class BlockCacheTest extends BrowserTestBase {
   }
 
   /**
-   * Test "user.roles" cache context.
+   * Tests "user.roles" cache context.
    */
   public function testCachePerRole() {
     \Drupal::state()->set('block_test.cache_contexts', ['user.roles']);
@@ -97,7 +97,7 @@ class BlockCacheTest extends BrowserTestBase {
     // Clear the cache and verify that the stale data is no longer there.
     Cache::invalidateTags(['block_view']);
     $this->drupalGet('');
-    $this->assertNoText($old_content);
+    $this->assertSession()->pageTextNotContains($old_content);
     // Fresh block content is displayed after clearing the cache.
     $this->assertSession()->pageTextContains($current_content);
 
@@ -108,7 +108,7 @@ class BlockCacheTest extends BrowserTestBase {
     $this->drupalLogout();
     $this->drupalGet('');
     // Anonymous user does not see content cached per-role for normal user.
-    $this->assertNoText($old_content);
+    $this->assertSession()->pageTextNotContains($old_content);
 
     // User with the same roles sees per-role cached content.
     $this->drupalLogin($this->normalUserAlt);
@@ -118,7 +118,7 @@ class BlockCacheTest extends BrowserTestBase {
     // Admin user does not see content cached per-role for normal user.
     $this->drupalLogin($this->adminUser);
     $this->drupalGet('');
-    $this->assertNoText($old_content);
+    $this->assertSession()->pageTextNotContains($old_content);
 
     // Block is served from the per-role cache.
     $this->drupalLogin($this->normalUser);
@@ -127,7 +127,7 @@ class BlockCacheTest extends BrowserTestBase {
   }
 
   /**
-   * Test a cacheable block without any additional cache context.
+   * Tests a cacheable block without any additional cache context.
    */
   public function testCachePermissions() {
     // user.permissions is a required context, so a user with different
@@ -155,7 +155,7 @@ class BlockCacheTest extends BrowserTestBase {
   }
 
   /**
-   * Test non-cacheable block.
+   * Tests non-cacheable block.
    */
   public function testNoCache() {
     \Drupal::state()->set('block_test.cache_max_age', 0);
@@ -176,7 +176,7 @@ class BlockCacheTest extends BrowserTestBase {
   }
 
   /**
-   * Test "user" cache context.
+   * Tests "user" cache context.
    */
   public function testCachePerUser() {
     \Drupal::state()->set('block_test.cache_contexts', ['user']);
@@ -208,7 +208,7 @@ class BlockCacheTest extends BrowserTestBase {
   }
 
   /**
-   * Test "url" cache context.
+   * Tests "url" cache context.
    */
   public function testCachePerPage() {
     \Drupal::state()->set('block_test.cache_contexts', ['url']);
@@ -227,7 +227,7 @@ class BlockCacheTest extends BrowserTestBase {
     $this->assertSession()->statusCodeEquals(200);
     // Verify that block content cached for the test page does not show up
     // for the user page.
-    $this->assertNoText($old_content);
+    $this->assertSession()->pageTextNotContains($old_content);
     $this->drupalGet('test-page');
     $this->assertSession()->statusCodeEquals(200);
     // Verify that the block content is cached for the test page.

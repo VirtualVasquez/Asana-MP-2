@@ -34,8 +34,8 @@ class DisplayCRUDTest extends UITestBase {
    * Tests adding a display.
    */
   public function testAddDisplay() {
-    // Show the master display.
-    $this->config('views.settings')->set('ui.show.master_display', TRUE)->save();
+    // Show the default display.
+    $this->config('views.settings')->set('ui.show.default_display', TRUE)->save();
 
     $settings['page[create]'] = FALSE;
     $view = $this->randomView($settings);
@@ -47,7 +47,7 @@ class DisplayCRUDTest extends UITestBase {
     $this->submitForm([], 'Add Page');
     $this->assertSession()->linkByHrefExists($path_prefix . '/page_1', 0, 'Make sure after adding a display the new display appears in the UI');
 
-    $this->assertSession()->linkNotExists('Master*', 'Make sure the master display is not marked as changed.');
+    $this->assertSession()->linkNotExists('Default*', 'Make sure the default display is not marked as changed.');
     $this->assertSession()->linkExists('Page*', 0, 'Make sure the added display is marked as changed.');
 
     $this->drupalGet("admin/structure/views/nojs/display/{$view['id']}/page_1/path");
@@ -73,11 +73,8 @@ class DisplayCRUDTest extends UITestBase {
     $this->drupalGet($path_prefix . '/page_1');
     $this->submitForm([], 'Delete Page');
     $this->assertSession()->buttonExists('edit-displays-settings-settings-content-tab-content-details-top-actions-undo-delete');
-    $element = $this->xpath('//a[contains(@href, :href) and contains(@class, :class)]', [':href' => $path_prefix . '/page_1', ':class' => 'views-display-deleted-link']);
-    $this->assertTrue(!empty($element), 'Make sure the display link is marked as to be deleted.');
-
-    $element = $this->xpath('//a[contains(@href, :href) and contains(@class, :class)]', [':href' => $path_prefix . '/page_1', ':class' => 'views-display-deleted-link']);
-    $this->assertTrue(!empty($element), 'Make sure the display link is marked as to be deleted.');
+    // Test that the display link is marked as to be deleted.
+    $this->assertSession()->elementExists('xpath', "//a[contains(@href, '{$path_prefix}/page_1') and contains(@class, 'views-display-deleted-link')]");
 
     // Undo the deleting of the display.
     $this->drupalGet($path_prefix . '/page_1');
@@ -143,7 +140,7 @@ class DisplayCRUDTest extends UITestBase {
     $this->assertSession()->linkByHrefExists($path_prefix . '/block_1', 0, 'Make sure after duplicating the new display appears in the UI');
     $this->assertSession()->addressEquals($path_prefix . '/block_1');
     $this->assertSession()->pageTextContains('Block settings');
-    $this->assertNoText('Page settings');
+    $this->assertSession()->pageTextNotContains('Page settings');
 
     $this->submitForm([], 'Save');
     $view = Views::getView($view['id']);

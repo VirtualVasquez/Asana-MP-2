@@ -139,8 +139,8 @@ EOF;
       'uri' => $path . '/' . $filename,
       'filemime' => 'text/x-gettext-translation',
       'timestamp' => $timestamp,
-      'status' => FILE_STATUS_PERMANENT,
     ]);
+    $file->setPermanent();
     file_put_contents($file->getFileUri(), $po_header . $text);
     touch(\Drupal::service('file_system')->realpath($file->getFileUri()), $timestamp);
     $file->save();
@@ -303,7 +303,7 @@ EOF;
    */
   protected function assertTranslation($source, $translation, $langcode, $message = '') {
     $query = Database::getConnection()->select('locales_target', 'lt');
-    $query->innerJoin('locales_source', 'ls', 'ls.lid = lt.lid');
+    $query->innerJoin('locales_source', 'ls', '[ls].[lid] = [lt].[lid]');
     $db_translation = $query->fields('lt', ['translation'])
       ->condition('ls.source', $source)
       ->condition('lt.language', $langcode)

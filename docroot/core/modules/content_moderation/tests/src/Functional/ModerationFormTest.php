@@ -66,7 +66,7 @@ class ModerationFormTest extends ModerationStateTestBase {
     $this->assertSession()->optionNotExists('moderation_state[0][state]', 'archived');
 
     // Create new moderated content in draft.
-    $this->submitForm(['moderation_state[0][state]' => 'draft'], t('Save'));
+    $this->submitForm(['moderation_state[0][state]' => 'draft'], 'Save');
 
     $node = $this->drupalGetNodeByTitle('Some moderated content');
     $canonical_path = sprintf('node/%d', $node->id());
@@ -182,7 +182,7 @@ class ModerationFormTest extends ModerationStateTestBase {
   }
 
   /**
-   * Test moderation non-bundle entity type.
+   * Tests moderation non-bundle entity type.
    */
   public function testNonBundleModerationForm() {
     $this->drupalLogin($this->rootUser);
@@ -215,7 +215,7 @@ class ModerationFormTest extends ModerationStateTestBase {
     // default revision.
     $this->drupalGet('entity_test_mulrevpub/manage/1');
     $this->assertSession()->statusCodeEquals(200);
-    $this->assertNoText('Status');
+    $this->assertSession()->pageTextNotContains('Status');
 
     // The latest version page should not show, because there is still no
     // pending revision.
@@ -230,7 +230,7 @@ class ModerationFormTest extends ModerationStateTestBase {
     // default revision.
     $this->drupalGet('entity_test_mulrevpub/manage/1');
     $this->assertSession()->statusCodeEquals(200);
-    $this->assertNoText('Status');
+    $this->assertSession()->pageTextNotContains('Status');
 
     // The latest version page should show the moderation form and have "Draft"
     // status, because the pending revision is in "Draft".
@@ -487,7 +487,7 @@ class ModerationFormTest extends ModerationStateTestBase {
   }
 
   /**
-   * Test the moderation_state field when an alternative widget is set.
+   * Tests the moderation_state field when an alternative widget is set.
    */
   public function testAlternativeModerationStateWidget() {
     $entity_form_display = EntityFormDisplay::load('node.moderated_content.default');

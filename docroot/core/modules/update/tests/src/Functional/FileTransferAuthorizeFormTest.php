@@ -26,7 +26,6 @@ class FileTransferAuthorizeFormTest extends UpdateTestBase {
     $admin_user = $this->drupalCreateUser([
       'administer modules',
       'administer software updates',
-      'administer site configuration',
     ]);
     $this->drupalLogin($admin_user);
 
@@ -52,19 +51,19 @@ class FileTransferAuthorizeFormTest extends UpdateTestBase {
 
     // Ensure the module does not already exist.
     $this->drupalGet('admin/modules');
-    $this->assertNoText('Update test new module');
+    $this->assertSession()->pageTextNotContains('Update test new module');
 
     $edit = [
       'project_url' => $url,
     ];
     $this->drupalGet('admin/modules/install');
-    $this->submitForm($edit, 'Install');
+    $this->submitForm($edit, 'Continue');
     $edit = [
       'connection_settings[authorize_filetransfer_default]' => 'system_test',
       'connection_settings[system_test][update_test_username]' => $this->randomMachineName(),
     ];
     $this->submitForm($edit, 'Continue');
-    $this->assertSession()->pageTextContains('Installation was completed successfully.');
+    $this->assertSession()->pageTextContains('Files were added successfully.');
 
     // Ensure the module is available to install.
     $this->drupalGet('admin/modules');

@@ -55,7 +55,9 @@ class FileFieldWidgetTest extends FileFieldTestBase {
    *   A file object, or FALSE on error.
    */
   protected function createTemporaryFile($data, UserInterface $user = NULL) {
-    $file = file_save_data($data, NULL, NULL);
+    /** @var \Drupal\file\FileRepositoryInterface $file_repository */
+    $file_repository = \Drupal::service('file.repository');
+    $file = $file_repository->writeData($data, "public://");
 
     if ($file) {
       if ($user) {
@@ -106,13 +108,12 @@ class FileFieldWidgetTest extends FileFieldTestBase {
     $this->assertSession()->buttonExists('Upload');
     // Test label has correct 'for' attribute.
     $input = $this->assertSession()->fieldExists("files[{$field_name}_0]");
-    $label = $this->xpath('//label[@for="' . $input->getAttribute('id') . '"]');
-    $this->assertTrue(isset($label[0]), 'Label for upload found.');
+    $this->assertSession()->elementExists('xpath', '//label[@for="' . $input->getAttribute('id') . '"]');
 
     // Save the node and ensure it does not have the file.
     $this->submitForm([], 'Save');
     $node = $node_storage->loadUnchanged($nid);
-    $this->assertTrue(empty($node->{$field_name}->target_id), 'File was successfully removed from the node.');
+    $this->assertEmpty($node->{$field_name}->target_id, 'File was successfully removed from the node.');
   }
 
   /**
@@ -203,7 +204,7 @@ class FileFieldWidgetTest extends FileFieldTestBase {
     preg_match('/node\/([0-9])/', $this->getUrl(), $matches);
     $nid = $matches[1];
     $node = $node_storage->loadUnchanged($nid);
-    $this->assertTrue(empty($node->{$field_name}->target_id), 'Node was successfully saved without any files.');
+    $this->assertEmpty($node->{$field_name}->target_id, 'Node was successfully saved without any files.');
 
     // Try to upload more files than allowed on revision.
     $upload_files_node_revision = [$test_file, $test_file, $test_file, $test_file];
@@ -226,7 +227,7 @@ class FileFieldWidgetTest extends FileFieldTestBase {
     // Try to upload multiple files, but fewer than the maximum.
     $nid = $this->uploadNodeFiles($upload_files_node_creation, $field_name, $type_name, TRUE, []);
     $node = $node_storage->loadUnchanged($nid);
-    $this->assertSame(count($upload_files_node_creation), count($node->{$field_name}), 'Node was successfully saved with multiple files.');
+    $this->assertSameSize($upload_files_node_creation, $node->{$field_name}, 'Node was successfully saved with multiple files.');
 
     // Try to upload exactly the allowed number of files on revision.
     $this->uploadNodeFile($test_file, $field_name, $node->id(), 1, [], TRUE);
@@ -378,13 +379,12 @@ class FileFieldWidgetTest extends FileFieldTestBase {
     $edit[$name] = \Drupal::service('file_system')->realpath($test_file_image->getFileUri());
     $this->submitForm($edit, 'Upload');
 
-    $error_message = t('Only files with the following extensions are allowed: %files-allowed.', ['%files-allowed' => 'txt']);
-    $this->assertRaw($error_message);
+    $this->assertSession()->pageTextContains("Only files with the following extensions are allowed: txt.");
 
     // Upload file with correct extension, check that error message is removed.
     $edit[$name] = \Drupal::service('file_system')->realpath($test_file_text->getFileUri());
     $this->submitForm($edit, 'Upload');
-    $this->assertNoRaw($error_message);
+    $this->assertSession()->pageTextNotContains("Only files with the following extensions are allowed: txt.");
   }
 
   /**
@@ -474,6 +474,87 @@ class FileFieldWidgetTest extends FileFieldTestBase {
   }
 
   /**
+   * Tests maximum upload file size validation.
+   */
+  public function testMaximumUploadFileSizeValidation() {
+    // Grant the admin user required permissions.
+    user_role_grant_permissions($this->adminUser->roles[0]->target_id, ['administer node fields']);
+
+    $type_name = 'article';
+    $field_name = strtolower($this->randomMachineName());
+    $this->createFileField($field_name, 'node', $type_name);
+    /** @var \Drupal\Field\FieldConfigInterface $field */
+    $field = FieldConfig::loadByName('node', $type_name, $field_name);
+    $field_id = $field->id();
+    $this->drupalGet("admin/structure/types/manage/$type_name/fields/$field_id");
+
+    // Tests that form validation trims the user input.
+    $edit = ['settings[max_filesize]' => ' 5.1 megabytes '];
+    $this->submitForm($edit, 'Save settings');
+    $this->assertSession()->pageTextContains('Saved ' . $field_name . ' configuration.');
+
+    // Reload the field config to check for the saved value.
+    /** @var \Drupal\Field\FieldConfigInterface $field */
+    $field = FieldConfig::loadByName('node', $type_name, $field_name);
+    $settings = $field->getSettings();
+    $this->assertEquals('5.1 megabytes', $settings['max_filesize'], 'The max filesize value had been trimmed on save.');
+  }
+
+  /**
+   * Tests configuring file field's allowed file extensions setting.
+   */
+  public function testFileExtensionsSetting() {
+    // Grant the admin user required permissions.
+    user_role_grant_permissions($this->adminUser->roles[0]->target_id, ['administer node fields']);
+
+    $type_name = 'article';
+    $field_name = strtolower($this->randomMachineName());
+    $this->createFileField($field_name, 'node', $type_name);
+    $field = FieldConfig::loadByName('node', $type_name, $field_name);
+    $field_id = $field->id();
+
+    // By default allowing .php files without .txt is not permitted.
+    $this->drupalGet("admin/structure/types/manage/$type_name/fields/$field_id");
+    $edit = ['settings[file_extensions]' => 'jpg php'];
+    $this->submitForm($edit, 'Save settings');
+    $this->assertSession()->pageTextContains('Add txt to the list of allowed extensions to securely upload files with a php extension. The txt extension will then be added automatically.');
+
+    // Test allowing .php and .txt.
+    $edit = ['settings[file_extensions]' => 'jpg php txt'];
+    $this->submitForm($edit, 'Save settings');
+    $this->assertSession()->pageTextContains('Saved ' . $field_name . ' configuration.');
+
+    // If the system is configured to allow insecure uploads, .txt is not
+    // required when allowing .php.
+    $this->config('system.file')->set('allow_insecure_uploads', TRUE)->save();
+    $this->drupalGet("admin/structure/types/manage/$type_name/fields/$field_id");
+    $edit = ['settings[file_extensions]' => 'jpg php'];
+    $this->submitForm($edit, 'Save settings');
+    $this->assertSession()->pageTextContains('Saved ' . $field_name . ' configuration.');
+
+    // Check that a file extension with an underscore can be configured.
+    $edit = [
+      'settings[file_extensions]' => 'x_t x.t xt x_y_t',
+    ];
+    $this->drupalGet("admin/structure/types/manage/$type_name/fields/$field_id");
+    $this->submitForm($edit, 'Save settings');
+    $field = FieldConfig::loadByName('node', $type_name, $field_name);
+    $this->assertEquals('x_t x.t xt x_y_t', $field->getSetting('file_extensions'));
+
+    // Check that a file field with an invalid value in allowed extensions
+    // property throws an error message.
+    $invalid_extensions = ['x_.t', 'x._t', 'xt_', 'x__t', '_xt'];
+    foreach ($invalid_extensions as $value) {
+      $edit = [
+        'settings[file_extensions]' => $value,
+      ];
+      $this->drupalGet("admin/structure/types/manage/$type_name/fields/$field_id");
+      $this->submitForm($edit, 'Save settings');
+      $this->assertSession()->pageTextContains("The list of allowed extensions is not valid. Allowed characters are a-z, 0-9, '.', and '_'. The first and last characters cannot be '.' or '_', and these two characters cannot appear next to each other. Separate extensions with a comma or space.");
+    }
+  }
+
+  /**
    * Helper for testing exploiting the temporary file removal using fid.
    *
    * @param \Drupal\user\UserInterface $victim_user
@@ -494,7 +575,7 @@ class FileFieldWidgetTest extends FileFieldTestBase {
     $victim_tmp_file = $this->createTemporaryFile('some text', $victim_user);
     $victim_tmp_file = File::load($victim_tmp_file->id());
     $this->assertTrue($victim_tmp_file->isTemporary(), 'New file saved to disk is temporary.');
-    $this->assertFalse(empty($victim_tmp_file->id()), 'New file has an fid.');
+    $this->assertNotEmpty($victim_tmp_file->id(), 'New file has an fid.');
     $this->assertEquals($victim_user->id(), $victim_tmp_file->getOwnerId(), 'New file belongs to the victim.');
 
     // Have attacker create a new node with a different uploaded file and

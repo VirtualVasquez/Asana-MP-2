@@ -92,7 +92,7 @@ class CommentInterfaceTest extends CommentTestBase {
     ];
     $pattern_permalink = '//footer[contains(@class,"comment__meta")]/a[contains(@href,:link) and text()="Permalink"]';
     $permalink = $this->xpath($pattern_permalink, $arguments);
-    $this->assertTrue(!empty($permalink), 'Permalink link found.');
+    $this->assertNotEmpty($permalink, 'Permalink link found.');
 
     // Set comments to have subject and preview to optional.
     $this->drupalLogout();
@@ -198,7 +198,7 @@ class CommentInterfaceTest extends CommentTestBase {
     $this->node = $this->drupalCreateNode(['type' => 'article', 'promote' => 1, 'comment' => [['status' => CommentItemInterface::OPEN]]]);
     $this->assertNotNull($this->node, 'Article node created.');
     $this->drupalGet('comment/reply/node/' . $this->node->id() . '/comment');
-    $this->assertNoText('This discussion is closed');
+    $this->assertSession()->pageTextNotContains('This discussion is closed');
     // Ensure that the comment body field exists.
     $this->assertSession()->fieldExists('edit-comment-body-0-value');
 
@@ -230,7 +230,7 @@ class CommentInterfaceTest extends CommentTestBase {
   }
 
   /**
-   * Test that the subject is automatically filled if disabled or left blank.
+   * Tests that the subject is automatically filled if disabled or left blank.
    *
    * When the subject field is blank or disabled, the first 29 characters of the
    * comment body are used for the subject. If this would break within a word,
@@ -253,7 +253,7 @@ class CommentInterfaceTest extends CommentTestBase {
   }
 
   /**
-   * Test that automatic subject is correctly created from HTML comment text.
+   * Tests that automatic subject is correctly created from HTML comment text.
    *
    * This is the same test as in CommentInterfaceTest::testAutoFilledSubject()
    * with the additional check that HTML is stripped appropriately prior to
@@ -317,8 +317,8 @@ class CommentInterfaceTest extends CommentTestBase {
 
     // Comment displayed in 'default' display mode found and has body text.
     $comment_element = $this->cssSelect('.comment-wrapper');
-    $this->assertTrue(!empty($comment_element));
-    $this->assertRaw('<p>' . $comment_text . '</p>');
+    $this->assertNotEmpty($comment_element);
+    $this->assertSession()->responseContains('<p>' . $comment_text . '</p>');
 
     // Create a new comment entity view mode.
     $mode = mb_strtolower($this->randomMachineName());
@@ -350,8 +350,8 @@ class CommentInterfaceTest extends CommentTestBase {
     // The comment should exist but without the body text because we used $mode
     // mode this time.
     $comment_element = $this->cssSelect('.comment-wrapper');
-    $this->assertTrue(!empty($comment_element));
-    $this->assertNoRaw('<p>' . $comment_text . '</p>');
+    $this->assertNotEmpty($comment_element);
+    $this->assertSession()->responseNotContains('<p>' . $comment_text . '</p>');
   }
 
 }

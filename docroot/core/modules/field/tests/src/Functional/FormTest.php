@@ -126,19 +126,19 @@ class FormTest extends FieldTestBase {
     // Verify that no extraneous widget is displayed.
     $this->assertSession()->fieldNotExists("{$field_name}[1][value]");
 
-    // Check that hook_field_widget_form_alter() does not believe this is the
-    // default value form.
-    $this->assertNoText('From hook_field_widget_form_alter(): Default form is true.');
-    // Check that hook_field_widget_form_alter() does not believe this is the
-    // default value form.
-    $this->assertNoText('From hook_field_widget_multivalue_form_alter(): Default form is true.');
+    // Check that hook_field_widget_single_element_form_alter() does not believe
+    // this is the default value form.
+    $this->assertSession()->pageTextNotContains('From hook_field_widget_single_element_form_alter(): Default form is true.');
+    // Check that hook_field_widget_single_element_form_alter() does not believe
+    // this is the default value form.
+    $this->assertSession()->pageTextNotContains('From hook_field_widget_complete_form_alter(): Default form is true.');
 
     // Submit with invalid value (field-level validation).
     $edit = [
       "{$field_name}[0][value]" => -1,
     ];
     $this->submitForm($edit, 'Save');
-    $this->assertRaw(t('%name does not accept the value -1.', ['%name' => $this->field['label']]));
+    $this->assertSession()->pageTextContains("{$this->field['label']} does not accept the value -1.");
     // TODO : check that the correct field is flagged for error.
 
     // Create an entity
@@ -233,7 +233,7 @@ class FormTest extends FieldTestBase {
     $edit = [];
     $this->drupalGet('entity_test/add');
     $this->submitForm($edit, 'Save');
-    $this->assertRaw(t('@name field is required.', ['@name' => $this->field['label']]));
+    $this->assertSession()->pageTextContains("{$this->field['label']} field is required.");
 
     // Create an entity
     $value = mt_rand(1, 127);
@@ -254,7 +254,7 @@ class FormTest extends FieldTestBase {
     ];
     $this->drupalGet('entity_test/manage/' . $id . '/edit');
     $this->submitForm($edit, 'Save');
-    $this->assertRaw(t('@name field is required.', ['@name' => $this->field['label']]));
+    $this->assertSession()->pageTextContains("{$this->field['label']} field is required.");
   }
 
   public function testFieldFormUnlimited() {
@@ -366,8 +366,7 @@ class FormTest extends FieldTestBase {
     $this->assertTrue(isset($element[0]), 'Required symbol added field label.');
     // Check that the label of the field input is visually hidden and contains
     // the field title and an indication of the delta for a11y.
-    $element = $this->xpath('//label[@for=:for and contains(@class, "visually-hidden") and contains(text(), :value)]', [':for' => 'edit-field-unlimited-0-value', ':value' => $this->field['label'] . ' (value 1)']);
-    $this->assertTrue(isset($element[0]), 'Required symbol not added for field input.');
+    $this->assertSession()->elementExists('xpath', "//label[@for='edit-field-unlimited-0-value' and contains(@class, 'visually-hidden') and contains(text(), '{$this->field['label']} (value 1)')]");
   }
 
   /**
@@ -466,7 +465,7 @@ class FormTest extends FieldTestBase {
     // Submit the form with more values than the field accepts.
     $edit = [$field_name => '1, 2, 3, 4, 5'];
     $this->submitForm($edit, 'Save');
-    $this->assertRaw('this field cannot hold more than 4 values');
+    $this->assertSession()->pageTextContains('this field cannot hold more than 4 values');
     // Check that the field values were not submitted.
     $this->assertFieldValues($entity_init, $field_name, [1, 2, 3]);
 
@@ -690,31 +689,31 @@ class FormTest extends FieldTestBase {
   }
 
   /**
-   * Tests hook_field_widget_multivalue_form_alter().
+   * Tests hook_field_widget_complete_form_alter().
    */
   public function testFieldFormMultipleWidgetAlter() {
-    $this->widgetAlterTest('hook_field_widget_multivalue_form_alter', 'test_field_widget_multiple');
+    $this->widgetAlterTest('hook_field_widget_complete_form_alter', 'test_field_widget_multiple');
   }
 
   /**
-   * Tests hook_field_widget_multivalue_form_alter() with single value elements.
+   * Tests hook_field_widget_complete_form_alter() with single value elements.
    */
   public function testFieldFormMultipleWidgetAlterSingleValues() {
-    $this->widgetAlterTest('hook_field_widget_multivalue_form_alter', 'test_field_widget_multiple_single_value');
+    $this->widgetAlterTest('hook_field_widget_complete_form_alter', 'test_field_widget_multiple_single_value');
   }
 
   /**
-   * Tests hook_field_widget_multivalue_WIDGET_TYPE_form_alter().
+   * Tests hook_field_widget_complete_WIDGET_TYPE_form_alter().
    */
   public function testFieldFormMultipleWidgetTypeAlter() {
-    $this->widgetAlterTest('hook_field_widget_multivalue_WIDGET_TYPE_form_alter', 'test_field_widget_multiple');
+    $this->widgetAlterTest('hook_field_widget_complete_WIDGET_TYPE_form_alter', 'test_field_widget_multiple');
   }
 
   /**
-   * Tests hook_field_widget_multivalue_WIDGET_TYPE_form_alter() with single value elements.
+   * Tests hook_field_widget_complete_WIDGET_TYPE_form_alter() with single value elements.
    */
   public function testFieldFormMultipleWidgetTypeAlterSingleValues() {
-    $this->widgetAlterTest('hook_field_widget_multivalue_WIDGET_TYPE_form_alter', 'test_field_widget_multiple_single_value');
+    $this->widgetAlterTest('hook_field_widget_complete_WIDGET_TYPE_form_alter', 'test_field_widget_multiple_single_value');
   }
 
   /**

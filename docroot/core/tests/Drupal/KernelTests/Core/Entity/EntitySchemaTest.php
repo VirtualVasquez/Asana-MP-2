@@ -216,10 +216,7 @@ class EntitySchemaTest extends EntityKernelTestBase {
     // Now test updating a field with data.
     /** @var \Drupal\Core\Entity\FieldableEntityStorageInterface $storage */
     $storage = $this->entityTypeManager->getStorage($entity_type_id);
-    // The schema of ID fields is incorrectly recreated as 'int' instead of
-    // 'serial', so we manually have to specify an ID.
-    // @todo Remove this in https://www.drupal.org/project/drupal/issues/2928906
-    $storage->create(['id' => 1, 'revision_id' => 1])->save();
+    $storage->create()->save();
     $this->assertTrue($storage->countFieldData($field, TRUE));
     $update_manager->updateFieldStorageDefinition($field);
     $this->assertSame($expected, $this->findPrimaryKeys($entity_type));
@@ -340,7 +337,7 @@ class EntitySchemaTest extends EntityKernelTestBase {
     $entity_type_id_count = 0;
 
     foreach (array_keys($schema) as $storage_definition_name) {
-      list($entity_type_id, ,) = explode('.', $storage_definition_name);
+      [$entity_type_id] = explode('.', $storage_definition_name);
       if (in_array($entity_type_id, $entity_type_ids)) {
         $entity_type_id_count++;
       }
@@ -361,7 +358,7 @@ class EntitySchemaTest extends EntityKernelTestBase {
     $entity_type_id_count = 0;
 
     foreach (array_keys($schema) as $storage_definition_name) {
-      list($entity_type_id, ,) = explode('.', $storage_definition_name);
+      [$entity_type_id] = explode('.', $storage_definition_name);
       if (in_array($entity_type_id, $entity_type_ids)) {
         $entity_type_id_count++;
       }

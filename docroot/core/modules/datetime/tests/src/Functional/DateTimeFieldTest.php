@@ -78,8 +78,8 @@ class DateTimeFieldTest extends DateTestBase {
       preg_match('|entity_test/manage/(\d+)|', $this->getUrl(), $match);
       $id = $match[1];
       $this->assertSession()->pageTextContains('entity_test ' . $id . ' has been created.');
-      $this->assertRaw($date->format($date_format));
-      $this->assertNoRaw($date->format($time_format));
+      $this->assertSession()->responseContains($date->format($date_format));
+      $this->assertSession()->responseNotContains($date->format($time_format));
 
       // Verify the date doesn't change if using a timezone that is UTC+12 when
       // the entity is edited through the form.
@@ -273,8 +273,8 @@ class DateTimeFieldTest extends DateTestBase {
     preg_match('|entity_test/manage/(\d+)|', $this->getUrl(), $match);
     $id = $match[1];
     $this->assertSession()->pageTextContains('entity_test ' . $id . ' has been created.');
-    $this->assertRaw($date->format($date_format));
-    $this->assertRaw($date->format($time_format));
+    $this->assertSession()->responseContains($date->format($date_format));
+    $this->assertSession()->responseContains($date->format($time_format));
 
     /** @var \Drupal\Core\Entity\EntityDisplayRepositoryInterface $display_repository */
     $display_repository = \Drupal::service('entity_display.repository');
@@ -562,7 +562,7 @@ class DateTimeFieldTest extends DateTestBase {
 
     // Test the widget for validation notifications.
     foreach ($this->datelistDataProvider($field_label) as $data) {
-      list($date_value, $expected) = $data;
+      [$date_value, $expected] = $data;
 
       // Display creation form.
       $this->drupalGet('entity_test/add');
@@ -667,7 +667,7 @@ class DateTimeFieldTest extends DateTestBase {
   }
 
   /**
-   * Test default value functionality.
+   * Tests default value functionality.
    */
   public function testDefaultValue() {
     // Create a test content type.
@@ -776,7 +776,7 @@ class DateTimeFieldTest extends DateTestBase {
       // Check if default_date has been stored successfully.
       $config_entity = $this->config('field.field.node.date_content.' . $field_name)
         ->get();
-      $this->assertTrue(empty($config_entity['default_value']), 'Empty default value has been stored successfully');
+      $this->assertEmpty($config_entity['default_value'], 'Empty default value has been stored successfully');
 
       // Clear field cache in order to avoid stale cache values.
       \Drupal::service('entity_field.manager')->clearCachedFieldDefinitions();
@@ -789,7 +789,7 @@ class DateTimeFieldTest extends DateTestBase {
   }
 
   /**
-   * Test that invalid values are caught and marked as invalid.
+   * Tests that invalid values are caught and marked as invalid.
    */
   public function testInvalidField() {
     // Change the field to a datetime field.

@@ -456,7 +456,7 @@ class StyleSerializerTest extends ViewTestBase {
   }
 
   /**
-   * Test the field ID alias functionality of the DataFieldRow plugin.
+   * Tests the field ID alias functionality of the DataFieldRow plugin.
    */
   public function testUIFieldAlias() {
     $this->drupalLogin($this->adminUser);
@@ -589,7 +589,7 @@ class StyleSerializerTest extends ViewTestBase {
     }
     // Test that the excluded field is not shown in the row options.
     $this->drupalGet('admin/structure/views/nojs/display/test_serializer_display_field/rest_export_1/row_options');
-    $this->assertNoText('created');
+    $this->assertSession()->pageTextNotContains('created');
   }
 
   /**
@@ -855,7 +855,7 @@ class StyleSerializerTest extends ViewTestBase {
   }
 
   /**
-   * Test multilingual entity rows.
+   * Tests multilingual entity rows.
    */
   public function testMulEntityRows() {
     // Create some languages.

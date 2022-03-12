@@ -55,13 +55,13 @@ class SearchAdvancedSearchFormTest extends BrowserTestBase {
    */
   public function testNodeType() {
     // Verify some properties of the node that was created.
-    $this->assertTrue($this->node->getType() == 'page', 'Node type is Basic page.');
+    $this->assertSame('page', $this->node->getType(), 'Node type is Basic page.');
     $dummy_title = 'Lorem ipsum';
     $this->assertNotEquals($dummy_title, $this->node->label(), "Dummy title doesn't equal node title.");
 
     // Search for the dummy title with a GET query.
     $this->drupalGet('search/node', ['query' => ['keys' => $dummy_title]]);
-    $this->assertNoText($this->node->label());
+    $this->assertSession()->pageTextNotContains($this->node->label());
 
     // Search for the title of the node with a GET query.
     $this->drupalGet('search/node', ['query' => ['keys' => $this->node->label()]]);

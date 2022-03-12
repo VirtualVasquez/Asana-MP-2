@@ -56,7 +56,7 @@ class FilterTest extends ViewTestBase {
   }
 
   /**
-   * Test query of the row plugin.
+   * Tests query of the row plugin.
    */
   public function testFilterQuery() {
     // Check that we can find the test filter plugin.
@@ -81,7 +81,7 @@ class FilterTest extends ViewTestBase {
     $this->executeView($view);
 
     // Make sure the query have where data.
-    $this->assertTrue(!empty($view->query->where));
+    $this->assertNotEmpty($view->query->where);
 
     // Check the data added.
     $where = $view->query->where;
@@ -151,7 +151,7 @@ class FilterTest extends ViewTestBase {
   }
 
   /**
-   * Test no error message is displayed when all options are selected in an
+   * Tests no error message is displayed when all options are selected in an
    * exposed filter.
    */
   public function testInOperatorSelectAllOptions() {
@@ -171,7 +171,7 @@ class FilterTest extends ViewTestBase {
     $this->drupalGet('admin/structure/views/view/test_filter_in_operator_ui/edit/default');
     $this->submitForm([], 'Save');
     $this->submitForm([], 'Update preview');
-    $this->assertNoText('An illegal choice has been detected.');
+    $this->assertSession()->pageTextNotContains('An illegal choice has been detected.');
   }
 
   /**

@@ -52,10 +52,7 @@ class ReorderDisplays extends ViewsFormBase {
 
     // Sort the displays.
     uasort($displays, function ($display1, $display2) {
-      if ($display1['position'] != $display2['position']) {
-        return $display1['position'] < $display2['position'] ? -1 : 1;
-      }
-      return 0;
+      return $display1['position'] <=> $display2['position'];
     });
 
     $form['displays'] = [
@@ -106,7 +103,7 @@ class ReorderDisplays extends ViewsFormBase {
 
       $form['displays'][$id]['removed'] = [
         'checkbox' => [
-          '#title' => t('Remove @id', ['@id' => $id]),
+          '#title' => $this->t('Remove @id', ['@id' => $id]),
           '#title_display' => 'invisible',
           '#type' => 'checkbox',
           '#id' => 'display-removed-' . $id,

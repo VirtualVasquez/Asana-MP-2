@@ -55,6 +55,7 @@ class CommentUserNameTest extends ViewsKernelTestBase {
     $admin_role = Role::create([
       'id' => 'admin',
       'permissions' => ['administer comments', 'access user profiles'],
+      'label' => 'Admin',
     ]);
     $admin_role->save();
 
@@ -102,7 +103,7 @@ class CommentUserNameTest extends ViewsKernelTestBase {
   }
 
   /**
-   * Test the username formatter.
+   * Tests the username formatter.
    */
   public function testUsername() {
     $view_id = $this->randomMachineName();
@@ -149,7 +150,6 @@ class CommentUserNameTest extends ViewsKernelTestBase {
     $executable = Views::getView($view_id);
     $build = $executable->preview();
     $this->setRawContent($renderer->renderRoot($build));
-    $this->verbose($this->getRawContent());
 
     $this->assertLink('My comment title');
     $this->assertLink('Anonymous comment title');
@@ -158,7 +158,7 @@ class CommentUserNameTest extends ViewsKernelTestBase {
     $comment_author = $this->xpath('//div[contains(@class, :class)]/span[normalize-space(text())=""]', [
       ':class' => 'views-field-subject',
     ]);
-    $this->assertTrue(!empty($comment_author));
+    $this->assertNotEmpty($comment_author);
     // When comment belongs to an anonymous user the name field has a value and
     // it is rendered correctly.
     $this->assertLink('barry (not verified)');
@@ -174,7 +174,6 @@ class CommentUserNameTest extends ViewsKernelTestBase {
     $this->assertNoLink($this->adminUser->label());
     // Note: External users aren't pointing to drupal user profiles.
     $this->assertLink('barry (not verified)');
-    $this->verbose($this->getRawContent());
     $this->assertLink('My comment title');
     $this->assertLink('Anonymous comment title');
   }

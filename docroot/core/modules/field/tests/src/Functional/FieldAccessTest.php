@@ -79,7 +79,7 @@ class FieldAccessTest extends FieldTestBase {
   }
 
   /**
-   * Test that hook_entity_field_access() is called.
+   * Tests that hook_entity_field_access() is called.
    */
   public function testFieldAccess() {
 
@@ -92,7 +92,7 @@ class FieldAccessTest extends FieldTestBase {
     // specifically target the 'test_view_field' field.
     $this->drupalLogout();
     $this->drupalGet('node/' . $this->node->id());
-    $this->assertNoText($this->testViewFieldValue);
+    $this->assertSession()->pageTextNotContains($this->testViewFieldValue);
   }
 
 }

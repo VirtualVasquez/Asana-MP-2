@@ -195,14 +195,14 @@ class EntityFieldTest extends EntityKernelTestBase {
     unset($entity->name->value);
     $this->assertFalse(isset($entity->name->value), new FormattableMarkup('%entity_type: Name is not set.', ['%entity_type' => $entity_type]));
     $this->assertFalse(isset($entity->name[0]->value), new FormattableMarkup('%entity_type: Name is not set.', ['%entity_type' => $entity_type]));
-    $this->assertTrue(empty($entity->name->value), new FormattableMarkup('%entity_type: Name is empty.', ['%entity_type' => $entity_type]));
-    $this->assertTrue(empty($entity->name[0]->value), new FormattableMarkup('%entity_type: Name is empty.', ['%entity_type' => $entity_type]));
+    $this->assertEmpty($entity->name->value, new FormattableMarkup('%entity_type: Name is empty.', ['%entity_type' => $entity_type]));
+    $this->assertEmpty($entity->name[0]->value, new FormattableMarkup('%entity_type: Name is empty.', ['%entity_type' => $entity_type]));
 
     $entity->name->value = 'a value';
     $this->assertTrue(isset($entity->name->value), new FormattableMarkup('%entity_type: Name is set.', ['%entity_type' => $entity_type]));
     $this->assertTrue(isset($entity->name[0]->value), new FormattableMarkup('%entity_type: Name is set.', ['%entity_type' => $entity_type]));
-    $this->assertFalse(empty($entity->name->value), new FormattableMarkup('%entity_type: Name is not empty.', ['%entity_type' => $entity_type]));
-    $this->assertFalse(empty($entity->name[0]->value), new FormattableMarkup('%entity_type: Name is not empty.', ['%entity_type' => $entity_type]));
+    $this->assertNotEmpty($entity->name->value, new FormattableMarkup('%entity_type: Name is not empty.', ['%entity_type' => $entity_type]));
+    $this->assertNotEmpty($entity->name[0]->value, new FormattableMarkup('%entity_type: Name is not empty.', ['%entity_type' => $entity_type]));
     $this->assertTrue(isset($entity->name[0]), new FormattableMarkup('%entity_type: Name string item is set.', ['%entity_type' => $entity_type]));
     $this->assertFalse(isset($entity->name[1]), new FormattableMarkup('%entity_type: Second name string item is not set as it does not exist', ['%entity_type' => $entity_type]));
     $this->assertTrue(isset($entity->name), new FormattableMarkup('%entity_type: Name field is set.', ['%entity_type' => $entity_type]));
@@ -282,7 +282,7 @@ class EntityFieldTest extends EntityKernelTestBase {
     $entity2->name = $entity->name;
     $entity2->user_id = $entity->user_id;
     $entity2->field_test_text = $entity->field_test_text;
-    $this->assertFalse($entity->name === $entity2->name, new FormattableMarkup('%entity_type: Copying properties results in a different field object.', ['%entity_type' => $entity_type]));
+    $this->assertNotSame($entity->name, $entity2->name, new FormattableMarkup('%entity_type: Copying properties results in a different field object.', ['%entity_type' => $entity_type]));
     $this->assertEquals($entity->name->value, $entity2->name->value, new FormattableMarkup('%entity_type: Name field copied.', ['%entity_type' => $entity_type]));
     $this->assertEquals($entity->user_id->target_id, $entity2->user_id->target_id, new FormattableMarkup('%entity_type: User id field copied.', ['%entity_type' => $entity_type]));
     $this->assertEquals($entity->field_test_text->value, $entity2->field_test_text->value, new FormattableMarkup('%entity_type: Text field copied.', ['%entity_type' => $entity_type]));
@@ -291,7 +291,7 @@ class EntityFieldTest extends EntityKernelTestBase {
     // assigned value as is.
     $entity2 = $this->createTestEntity($entity_type);
     $entity2->_not_a_field = $entity->name;
-    $this->assertTrue($entity2->_not_a_field === $entity->name, new FormattableMarkup('%entity_type: Typed data objects can be copied to non-field properties as is.', ['%entity_type' => $entity_type]));
+    $this->assertSame($entity->name, $entity2->_not_a_field, new FormattableMarkup('%entity_type: Typed data objects can be copied to non-field properties as is.', ['%entity_type' => $entity_type]));
 
     // Tests adding a value to a field item list.
     $entity->name[] = 'Another name';
@@ -320,7 +320,7 @@ class EntityFieldTest extends EntityKernelTestBase {
     $this->assertTrue($entity->name->isEmpty(), new FormattableMarkup('%entity_type: Name field is empty.', ['%entity_type' => $entity_type]));
     $this->assertCount(1, $entity->name, new FormattableMarkup('%entity_type: Empty item is considered when counting.', ['%entity_type' => $entity_type]));
     $this->assertCount(1, iterator_to_array($entity->name->getIterator()), new FormattableMarkup('%entity_type: Count matches iterator count.', ['%entity_type' => $entity_type]));
-    $this->assertTrue($entity->name->getValue() === [0 => ['value' => NULL]], new FormattableMarkup('%entity_type: Name field value contains a NULL value.', ['%entity_type' => $entity_type]));
+    $this->assertSame([0 => ['value' => NULL]], $entity->name->getValue(), new FormattableMarkup('%entity_type: Name field value contains a NULL value.', ['%entity_type' => $entity_type]));
 
     // Test using filterEmptyItems().
     $entity->name = [NULL, 'foo'];

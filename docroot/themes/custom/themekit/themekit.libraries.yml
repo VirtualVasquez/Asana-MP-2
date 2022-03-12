@@ -15,16 +15,16 @@ fonts:
   css:
     theme:
       '//fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans:wght@400;700&display=swap': { type: external }
-rubik:
-  css:
-    theme:
-      //fonts.google.com/share?selection.family=Rubik { type: external }
-      css/styles.css: {}
-inter:
-  css:
-    theme:
-      //fonts.google.com/share?selection.family=Inter { type: external }
-      css/styles.css: {}
+#rubik:
+#  css:
+#    theme:
+#      //fonts.google.com/share?selection.family=Rubik { type: external }
+#      css/styles.css: {}
+#inter:
+#  css:
+#    theme:
+#      //fonts.google.com/share?selection.family=Inter { type: external }
+#      css/styles.css: {}
 
 
 

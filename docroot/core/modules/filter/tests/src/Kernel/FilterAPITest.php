@@ -68,17 +68,14 @@ class FilterAPITest extends EntityKernelTestBase {
     $expected_filter_text_without_html_generators = "Text with evil content and a URL: https://www.drupal.org!";
 
     $actual_filtered_text = check_markup($text, 'filtered_html', '', []);
-    $this->verbose("Actual:<pre>$actual_filtered_text</pre>Expected:<pre>$expected_filtered_text</pre>");
     $this->assertEquals($expected_filtered_text, $actual_filtered_text, 'Expected filter result.');
     $actual_filtered_text_without_html_generators = check_markup($text, 'filtered_html', '', [FilterInterface::TYPE_MARKUP_LANGUAGE]);
-    $this->verbose("Actual:<pre>$actual_filtered_text_without_html_generators</pre>Expected:<pre>$expected_filter_text_without_html_generators</pre>");
     $this->assertEquals($expected_filter_text_without_html_generators, $actual_filtered_text_without_html_generators, 'Expected filter result when skipping FilterInterface::TYPE_MARKUP_LANGUAGE filters.');
     // Related to @see FilterSecurityTest.php/testSkipSecurityFilters(), but
     // this check focuses on the ability to filter multiple filter types at once.
     // Drupal core only ships with these two types of filters, so this is the
     // most extensive test possible.
     $actual_filtered_text_without_html_generators = check_markup($text, 'filtered_html', '', [FilterInterface::TYPE_HTML_RESTRICTOR, FilterInterface::TYPE_MARKUP_LANGUAGE]);
-    $this->verbose("Actual:<pre>$actual_filtered_text_without_html_generators</pre>Expected:<pre>$expected_filter_text_without_html_generators</pre>");
     $this->assertEquals($expected_filter_text_without_html_generators, $actual_filtered_text_without_html_generators, 'Expected filter result when skipping FilterInterface::TYPE_MARKUP_LANGUAGE filters, even when trying to disable filters of the FilterInterface::TYPE_HTML_RESTRICTOR type.');
   }
 
@@ -301,7 +298,7 @@ class FilterAPITest extends EntityKernelTestBase {
       // The cache tags set by the filter_test_cache_merge filter.
       'merge:tag',
     ];
-    $this->assertEquals($expected_cache_tags, $build['#cache']['tags'], 'Expected cache tags present.');
+    $this->assertEqualsCanonicalizing($expected_cache_tags, $build['#cache']['tags'], 'Expected cache tags present.');
     $expected_cache_contexts = [
       // The cache context set by the filter_test_cache_contexts filter.
       'languages:' . LanguageInterface::TYPE_CONTENT,
@@ -311,7 +308,7 @@ class FilterAPITest extends EntityKernelTestBase {
       // The cache tags set by the filter_test_cache_merge filter.
       'user.permissions',
     ];
-    $this->assertEquals($expected_cache_contexts, $build['#cache']['contexts'], 'Expected cache contexts present.');
+    $this->assertEqualsCanonicalizing($expected_cache_contexts, $build['#cache']['contexts'], 'Expected cache contexts present.');
     $expected_markup = '<p>Hello, world!</p><p>This is a dynamic llama.</p>';
     $this->assertEquals($expected_markup, $build['#markup'], 'Expected #lazy_builder callback has been applied.');
   }
@@ -433,10 +430,12 @@ class FilterAPITest extends EntityKernelTestBase {
    *
    * @param \Symfony\Component\Validator\ConstraintViolationListInterface $violations
    *   The violations to assert.
-   * @param mixed $invalid_value
+   * @param string $invalid_value
    *   The expected invalid value.
+   *
+   * @internal
    */
-  public function assertFilterFormatViolation(ConstraintViolationListInterface $violations, $invalid_value) {
+  public function assertFilterFormatViolation(ConstraintViolationListInterface $violations, string $invalid_value): void {
     $filter_format_violation_found = FALSE;
     foreach ($violations as $violation) {
       if ($violation->getRoot() instanceof FilterFormatDataType && $violation->getInvalidValue() === $invalid_value) {
