@@ -1467,76 +1467,28 @@ ul.layout-selection {
   05 - Site Specific
   Improvements that are specific to this site
 \*------------------------------------*/
-.node--type-event-page .field--name-field-date-time, .node--type-event-page .block--field-blocknodeevent-pagefield-location {
-  margin-left: 10%;
-  text-transform: uppercase;
-  font-weight: bold;
-  font-size: 1.25em; }
-
-.node--type-event-page .field--name-field-date-time {
-  margin-top: 4em; }
-
-.node--type-event-page .block--field-blocknodeevent-pagefield-location {
-  margin-bottom: 6em; }
-
-.node--type-event-page .paragraph--type--header-banner-basic {
-  margin-left: 10%;
-  width: 60%;
-  position: absolute;
-  z-index: 20; }
-  .node--type-event-page .paragraph--type--header-banner-basic :first-child > h1 {
-    text-transform: uppercase;
-    font-weight: 700;
-    font-size: 6.5em;
-    line-height: 90%;
-    margin: 0 0 0.5em 0; }
-
-.node--type-event-page .field--name-field-link > a {
-  color: #212121;
-  background-color: #FFB648;
-  padding: 0.75em;
-  font-weight: bold; }
-
-.node--type-event-page .layout--twocol-section--50-50:nth-child(2) {
-  background-color: #F4F1E6;
-  padding: 5em 0 8em 0;
-  margin-top: -5%; }
-
-.node--type-event-page .field--name-field-subheading {
-  margin-left: 20%;
-  font-size: 3em;
-  font-weight: bold;
-  text-transform: uppercase;
-  line-height: 100%;
-  width: 60%;
+.region-header {
   display: flex;
-  flex-wrap: wrap;
-  align-content: end;
-  color: #7A3813; }
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 1em; }
+  .region-header #block-themekit-branding {
+    margin-left: 2em; }
 
-.node--type-event-page .block--field-blocknodeevent-pagefield-description {
-  width: 37%;
-  color: #212121;
-  margin-top: 6em;
-  margin-bottom: 2em; }
-
-.node--type-event-page .layout--twocol-section--50-50:nth-child(3) {
-  padding-top: 5em;
-  width: 80%;
-  margin-left: 10%; }
-  .node--type-event-page .layout--twocol-section--50-50:nth-child(3) a {
-    color: #FFB648;
-    text-decoration: underline;
+#block-themekit-main-menu .menu {
+  margin-right: 2em;
+  margin-top: 0.5em; }
+  #block-themekit-main-menu .menu .menu-item {
+    display: inline-block;
+    margin-left: 4em; }
+    #block-themekit-main-menu .menu .menu-item > a {
+      color: white;
+      font-weight: bold; }
+  #block-themekit-main-menu .menu .menu-item:last-of-type > a {
+    color: #212121;
+    background-color: #FFB648;
+    padding: 0.75em;
     font-weight: bold; }
-  .node--type-event-page .layout--twocol-section--50-50:nth-child(3) .field--name-field-heading {
-    font-size: 3rem;
-    font-weight: bolder; }
-  .node--type-event-page .layout--twocol-section--50-50:nth-child(3) .field--name-field-sponsor {
-    background-color: white;
-    border-radius: 1em;
-    padding: 2em;
-    text-align: center;
-    width: 65%; }
 
 #skip-to-content {
   position: fixed;
@@ -1601,6 +1553,116 @@ input[required] {
   color: white;
   background-color: #666666;
   padding: 0.5em; }
+
+.node--type-event-page .field--name-field-date-time, .node--type-event-page .field--name-field-location {
+  font-weight: bold;
+  margin-left: 30%; }
+
+.node--type-event-page .field--name-field-date-time {
+  margin-top: 3em; }
+
+.node--type-event-page .field--name-field-location {
+  margin-bottom: 6em; }
+
+.node--type-event-page .paragraph--type--header-banner-basic {
+  width: 50%;
+  margin-left: 20%;
+  position: absolute;
+  z-index: 20; }
+  .node--type-event-page .paragraph--type--header-banner-basic :first-child > h1 {
+    font-weight: 700;
+    font-size: 5em;
+    line-height: 90%; }
+
+.node--type-event-page .field--name-field-image > img {
+  width: 100%; }
+
+.node--type-event-page .field--name-field-date-time, .node--type-event-page .block--field-blocknodeevent-pagefield-location,
+.node--type-event-page h1, .node--type-event-page .field--name-field-subheading {
+  text-transform: uppercase; }
+
+.node--type-event-page .field--name-field-link > a {
+  color: #212121;
+  background-color: #FFB648;
+  padding: 0.75em;
+  font-weight: bold; }
+
+.node--type-event-page .layout--twocol-section--50-50:nth-child(2) .layout__region--first, .node--type-event-page .layout--twocol-section--50-50:nth-child(3) .layout__region--first {
+  justify-content: flex-end;
+  display: flex;
+  align-items: flex-start;
+  padding-right: 1em; }
+
+.node--type-event-page .layout--twocol-section--50-50:nth-child(2) .layout__region--second, .node--type-event-page .layout--twocol-section--50-50:nth-child(3) .layout__region--second {
+  padding-left: 1em; }
+
+.node--type-event-page .layout--twocol-section--50-50:nth-child(2) .layout__region--first .block--layout-builder, .node--type-event-page .layout--twocol-section--50-50:nth-child(2) .layout__region--second .block--layout-builder, .node--type-event-page .layout--twocol-section--50-50:nth-child(3) .layout__region--first .block--layout-builder, .node--type-event-page .layout--twocol-section--50-50:nth-child(3) .layout__region--second .block--layout-builder {
+  width: 70%; }
+
+.node--type-event-page .field--name-field-schedule, .node--type-event-page .block--field-blocknodeevent-pagefield-schedule {
+  height: 100%; }
+  .node--type-event-page .field--name-field-schedule div, .node--type-event-page .block--field-blocknodeevent-pagefield-schedule div {
+    height: 100%; }
+
+.node--type-event-page .field--name-field-subheading {
+  font-size: 3em;
+  font-weight: bold;
+  line-height: 90%;
+  color: #7A3813;
+  padding-left: 1.25em; }
+
+.node--type-event-page .block--field-blocknodeevent-pagefield-description {
+  line-height: 125%;
+  padding-right: 7em;
+  margin-top: 7em; }
+  .node--type-event-page .block--field-blocknodeevent-pagefield-description p {
+    font-size: 1.25em; }
+
+.node--type-event-page .block--field-blocknodeevent-pagefield-description, .node--type-event-page .block--field-blocknodeevent-pagefield-link {
+  padding-left: 0.75em;
+  color: #212121; }
+
+.node--type-event-page .field--name-field-link {
+  margin-top: 1em; }
+
+.node--type-event-page .layout--twocol-section--50-50:nth-child(2) {
+  background-color: #F4F1E6;
+  padding: 5em 0 5em 0;
+  margin-top: -5%; }
+
+.node--type-event-page .layout--twocol-section--50-50:nth-child(3) a {
+  color: #FFB648;
+  text-decoration: underline;
+  font-weight: bold; }
+
+.node--type-event-page .layout--twocol-section--50-50:nth-child(3) .field--name-field-heading {
+  font-size: 3rem;
+  font-weight: bolder;
+  margin-left: 0.5em; }
+
+.node--type-event-page .layout--twocol-section--50-50:nth-child(3) .field--name-field-sponsor {
+  background-color: white;
+  border-radius: 0.5em;
+  padding: 2em 10em;
+  text-align: center;
+  margin: 1em 1.5em;
+  position: absolute; }
+
+.node--type-event-page .layout--twocol-section--50-50:nth-child(3) h3 {
+  margin-bottom: -0.5em; }
+
+.node--type-event-page .field--name-field-schedule {
+  padding: 2em 4em; }
+  .node--type-event-page .field--name-field-schedule p {
+    margin-bottom: 2em; }
+  .node--type-event-page .field--name-field-schedule p:nth-child(5), .node--type-event-page .field--name-field-schedule p:nth-child(11), .node--type-event-page .field--name-field-schedule p:nth-child(12) {
+    margin-bottom: 0; }
+
+.node--type-event-page .field--name-field-lightening-talks {
+  padding: 2em 2em; }
+  .node--type-event-page .field--name-field-lightening-talks p:nth-child(4), .node--type-event-page .field--name-field-lightening-talks p:nth-child(6), .node--type-event-page .field--name-field-lightening-talks p:nth-child(8) {
+    margin-top: -1em;
+    margin-bottom: 2em; }
 
 
 /*# sourceMappingURL=global.css.map*/

@@ -1,0 +1,23 @@
+#block-themekit-main-menu{
+  .menu {
+    margin-right: 2em;
+    margin-top: 0.5em;
+    .menu-item{
+      display:inline-block;
+      margin-left:4em;
+      > a{
+        color:white;
+        font-weight: bold;
+      }
+    }
+    .menu-item:last-of-type{
+      > a{
+        color: #212121;
+        background-color: #FFB648;
+        padding: 0.75em;
+        font-weight: bold;
+      }
+    }
+
+  }
+}
