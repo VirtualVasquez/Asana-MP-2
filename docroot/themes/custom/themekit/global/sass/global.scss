@@ -21,7 +21,7 @@
 @import 'components/main-nav';
 
 // Event page helpers
-@import 'components/event-page';
+//@import 'components/event-page';
 
 // Sitewide styles
 @import 'components/accessibility';
@@ -29,3 +29,6 @@
 
 // Webform styles
 @import 'components/webform';
+
+// Event Page Styles
+@import 'pages/event-page';
